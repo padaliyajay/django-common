@@ -1,2 +1,10 @@
-<h1>{{ post.title }}</h1>
-<p>{{ post.description }}</p>
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.description }}</p>
+</div>
+{% endblock content %}

@@ -1,6 +1,14 @@
-<h1>Blog Home</h1>
-<ul>
-    {% for post in latest_posts %}
-    <li><a href="{% url 'post' post.slug %}">{{ post.title }}</a></li>
-    {% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% block title %}Blog Home{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1>Blog Home</h1>
+    <ul>
+        {% for post in latest_posts %}
+        <li><a href="{% url 'post' post.slug %}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

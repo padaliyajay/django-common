@@ -18,12 +18,13 @@ admin.site.register(Author)
 # Category
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'sort_order', 'status', 'date_added']
+    prepopulated_fields = {'slug': ('name',)}
 admin.site.register(Category, CategoryAdmin)
 
 # Comment
 class CommentAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_added'
-    list_display = ['name', 'post', 'date_added']
+    list_display = ['name', 'reply_to', 'post', 'date_added']
     autocomplete_fields = ['post']
 
     class Meta:

@@ -14,6 +14,7 @@ class Author(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
+    slug = models.SlugField(max_length=255, unique=True)
     sort_order = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
     date_added = models.DateTimeField(default=timezone.now, editable=False)
@@ -55,7 +56,7 @@ class Post(models.Model):
 # Comment
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
-    reply_to = models.ForeignKey('self', on_delete=models.CASCADE)
+    reply_to = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=60)
     description = models.TextField(max_length=1000)
     date_added = models.DateTimeField(default=timezone.now, editable=False)
