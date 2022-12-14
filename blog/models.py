@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 # Author
 class Author(models.Model):
@@ -13,7 +14,7 @@ class Author(models.Model):
 # Category
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+    description = RichTextField(blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True)
     sort_order = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
@@ -35,7 +36,7 @@ class Post(models.Model):
     ]
 
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = RichTextField()
     image = models.ImageField(upload_to ='uploads/%Y/%m/%d/')
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, related_name="posts", blank=True)

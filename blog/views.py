@@ -13,6 +13,8 @@ def index(request):
 def post(request, slug):
     data = dict()
 
-    data['post'] = Post.objects.get(slug=slug)
+    post = Post.objects.get(slug=slug)
+
+    data['post'] = post
 
     return render(request, 'blog/post.html', data)
