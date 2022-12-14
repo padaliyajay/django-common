@@ -36,6 +36,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
+    image = models.ImageField(upload_to ='uploads/%Y/%m/%d/')
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, related_name="posts", blank=True)
     slug = models.SlugField(max_length=255, unique=True)

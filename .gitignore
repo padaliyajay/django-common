@@ -1,2 +1,3 @@
 migrations
 .vscode
+db.sqlite3
