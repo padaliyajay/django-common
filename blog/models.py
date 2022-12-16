@@ -25,25 +25,25 @@ class Category(models.Model):
 
 # Post
 class Post(models.Model):
-    PUBLISHED = 1
-    DRAFT = 0
-    UNLISTED = -1
+    STATUS_PUBLISHED = 1
+    STATUS_DRAFT = 0
+    STATUS_UNLISTED = -1
 
     status_choices = [
-        (PUBLISHED, 'Published'),
-        (DRAFT, 'Draft'),
-        (UNLISTED, 'Unlisted'),
+        (STATUS_PUBLISHED, 'Published'),
+        (STATUS_DRAFT, 'Draft'),
+        (STATUS_UNLISTED, 'Unlisted'),
     ]
 
     title = models.CharField(max_length=255)
     description = RichTextField()
-    image = models.ImageField(upload_to ='uploads/%Y/%m/%d/')
+    image = models.ImageField(upload_to = 'uploads/%Y/%m/%d/')
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, related_name="posts", blank=True)
     slug = models.SlugField(max_length=255, unique=True)
     date_available = models.DateTimeField(default=timezone.now)
     sort_order = models.IntegerField(default=0)
-    status = models.SmallIntegerField(default=DRAFT, choices=status_choices)
+    status = models.SmallIntegerField(default=STATUS_DRAFT, choices=status_choices)
     date_added = models.DateTimeField(default=timezone.now, editable=False)
     date_modified = models.DateTimeField(default=timezone.now, editable=False)
 

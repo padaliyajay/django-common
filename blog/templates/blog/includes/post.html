@@ -1,0 +1,4 @@
+{% load static %}
+
+<a href="{% url 'post' post.slug %}"><img class="img-fluid mb-3" src="{% static post.image %}" alt="{{ post.title }}" /></a>
+<h3 class="h4"><a class="text-reset text-decoration-none" href="{% url 'post' post.slug %}">{{ post.title }}</a></h3>
