@@ -1,0 +1,23 @@
+{% load custom_form %}
+
+{% for field in form %}
+    <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+
+        {% if 'textarea' == field|field_type %}
+        <textarea id="{{ field.id_for_label }}" name="{{ field.html_name }}" placeholder="{{ field.label }}" class="form-control {% if field.errors %}is-invalid{% endif %}" {% if field.field.required %}required{% endif %}></textarea>
+        {% elif 'select' == field|field_type %}
+        <select id="{{ field.id_for_label }}" name="{{ field.html_name }}" class="form-control {% if field.errors %}is-invalid{% endif %}" {% if field.field.required %}required{% endif %}>
+            {% for value, name in field.field.choices %}
+            <option value="{{ value }}" {% if field.value == value %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+        {% else %}
+        <input id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="{{ field.field.widget.input_type }}" placeholder="{{ field.label }}" class="form-control {% if field.errors %}is-invalid{% endif %}" {% if field.field.required %}required{% endif %} />
+        {% endif %}
+        
+        {% if field.errors %}
+        <div class="invalid-feedback">{{ field.errors|join:', ' }}</div>
+        {% endif %}
+    </div>
+{% endfor %}

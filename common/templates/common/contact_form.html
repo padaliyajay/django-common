@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form class="container py-5" method="post">
+    {% include "common/messages.html" %}
+    {% csrf_token %}
+    {% include "common/form_field.html" %}
+    <button type="submit" class="btn btn-primary">Send message</button>
+</form>
+{% endblock content %}

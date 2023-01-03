@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form class="p-5" action="{% url 'blog_comment_form' post.slug %}" method="post">
+    {% csrf_token %}
+    {% include "common/form_field.html" %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock content %}

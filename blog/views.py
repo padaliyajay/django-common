@@ -1,5 +1,6 @@
-from .models import Post, Category
+from .models import Post, Category, Comment
 from django.views.generic import DetailView, TemplateView, ListView
+from django.views.generic.edit import CreateView
 
 # Home
 class HomeView(TemplateView):
@@ -16,6 +17,25 @@ class HomeView(TemplateView):
 class PostView(DetailView):
     template_name = 'blog/post.html'
     model = Post
+
+# Comment
+class CommentCreateView(CreateView):
+    model = Comment
+    fields = ('name', 'description',)
+    template_name = 'blog/comment_form.html'
+
+    def form_valid(self, form):
+        post = Post.objects.get(slug = self.kwargs['slug'])
+        form.instance.post = post
+        return super().form_valid(form)
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = Post.objects.get(slug = self.kwargs['slug'])
+        context["post"] = post
+        return context
+    
     
 # Category
 class CategoryView(ListView):

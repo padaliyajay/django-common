@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
+    'common.apps.CommonConfig',
     'ckeditor',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -133,3 +134,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email
+DEFAULT_FROM_EMAIL = 'admin@admin.com'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
